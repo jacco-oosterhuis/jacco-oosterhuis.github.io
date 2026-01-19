@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacco Oosterhuis | Data Scientist</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html"><span class="cursor">_</span> jacco<span class="accent">()</span></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="blog.html" class="nav-link">Blog</a></li>
+            <li><a href="media.html" class="nav-link">Books & Films</a></li>
+            <li><a href="https://www.linkedin.com/in/jaccooosterhuis" target="_blank" class="nav-link external">LinkedIn <span class="arrow">↗</span></a></li>
+            <li><a href="https://findpenguins.com/trackingjacco" target="_blank" class="nav-link external">FindPenguins 🐧</a></li>
+        </ul>
+        <div class="light-switch" title="Toggle light/dark mode">
+            <div class="switch-plate" role="button" aria-label="Toggle theme">
+                <div class="switch-toggle"></div>
+            </div>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1>Hello, World<span class="blink">_</span></h1>
+                <p class="tagline">Data Scientist by day, <span id="rotating-text">penguin tracker</span> by night</p>
+                <p class="philosophy-quote">"Whereof one cannot speak, thereof one must be silent." — but I blog anyway.</p>
+            </div>
+            <div class="hero-image">
+                <figure class="duck-rabbit-container">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Duck-Rabbit_illusion.jpg" alt="Duck-Rabbit Illusion" class="duck-rabbit" id="duckRabbit">
+                    <figcaption>
+                        Is it a <span id="animal" class="clickable">duck</span>? Click to find out.
+                        <br>
+                        <small>— inspired by Wittgenstein's Philosophical Investigations</small>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="travel" class="section travel">
+            <h2>Adventures 🐧</h2>
+            <p class="section-intro">
+                Follow my travels on FindPenguins.
+                Because what's a data scientist without some geolocation data?
+            </p>
+            <div class="penguin-embed">
+                <div class="findpenguins-media" findpgns-version="1" findpgns-embed="user"><a href="https://findpenguins.com/2zhhsb5mmg9cf" target="_top">Vita activa | FindPenguins</a></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wittgenstein-quote">
+            <p class="quote-text" id="wittgenstein-text"></p>
+            <p class="quote-source">— Ludwig Wittgenstein, <em>Philosophische Untersuchungen</em></p>
+        </div>
+        <div class="footer-main">
+            <p>Built with curiosity and caffeine | <span id="year"></span></p>
+            <p class="footer-joke">P(you enjoyed this) > 0.5</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script async defer src="//findpenguins.com/js/embed.js"></script>
+</body>
+</html>

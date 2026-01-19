@@ -1,0 +1,1667 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Dark theme (default) */
+    --bg-primary: #1a1b26;
+    --bg-secondary: #24283b;
+    --bg-tertiary: #1f2335;
+    --text-primary: #c0caf5;
+    --text-secondary: #a9b1d6;
+    --text-muted: #565f89;
+    --accent-blue: #7aa2f7;
+    --accent-purple: #bb9af7;
+    --accent-green: #9ece6a;
+    --accent-orange: #ff9e64;
+    --accent-red: #f7768e;
+    --accent-cyan: #7dcfff;
+    --accent-yellow: #e0af68;
+    --font-mono: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Navbar backgrounds */
+    --navbar-bg: rgba(26, 27, 38, 0.95);
+
+    /* Jupyter colors */
+    --jupyter-bg: #111827;
+    --jupyter-header: #1f2937;
+    --jupyter-border: #374151;
+    --jupyter-cell-bg: #1f2937;
+    --jupyter-text: #e5e7eb;
+    --jupyter-text-muted: #9ca3af;
+}
+
+/* Light theme */
+[data-theme="light"] {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #e2e8f0;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-green: #22c55e;
+    --accent-orange: #f97316;
+    --accent-red: #ef4444;
+    --accent-cyan: #06b6d4;
+    --accent-yellow: #eab308;
+
+    /* Navbar backgrounds */
+    --navbar-bg: rgba(248, 250, 252, 0.95);
+
+    /* Jupyter colors for light mode */
+    --jupyter-bg: #ffffff;
+    --jupyter-header: #f1f5f9;
+    --jupyter-border: #e2e8f0;
+    --jupyter-cell-bg: #f8fafc;
+    --jupyter-text: #1e293b;
+    --jupyter-text-muted: #64748b;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid var(--bg-secondary);
+}
+
+.nav-brand {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.nav-brand a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav-link.active {
+    color: var(--accent-cyan);
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-brand .cursor {
+    color: var(--accent-green);
+    animation: blink 1s infinite;
+}
+
+.nav-brand .accent {
+    color: var(--accent-purple);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--accent-cyan);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-cyan);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link .arrow {
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding: 6rem 2rem 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-family: var(--font-mono);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.blink {
+    animation: blink 1s infinite;
+    -webkit-text-fill-color: var(--accent-green);
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.tagline {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+#rotating-text {
+    color: var(--accent-orange);
+    font-weight: 600;
+}
+
+.philosophy-quote {
+    font-style: italic;
+    color: var(--text-muted);
+    border-left: 3px solid var(--accent-purple);
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+/* Duck-Rabbit Image */
+.hero-image {
+    max-width: 400px;
+}
+
+.duck-rabbit-container {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--bg-tertiary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.duck-rabbit-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(122, 162, 247, 0.1);
+}
+
+.duck-rabbit {
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.duck-rabbit.flipped {
+    transform: scaleX(-1);
+}
+
+figcaption {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.clickable {
+    color: var(--accent-cyan);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.clickable:hover {
+    color: var(--accent-purple);
+}
+
+/* Page content (for non-home pages) */
+.page-content {
+    padding-top: 80px;
+    min-height: calc(100vh - 150px);
+}
+
+/* Sections */
+.section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section h2 {
+    font-size: 2rem;
+    font-family: var(--font-mono);
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.section h2 .accent {
+    color: var(--accent-yellow);
+}
+
+.section-intro {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* About Section - Terminal */
+.terminal {
+    background: var(--bg-tertiary);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 1px solid var(--bg-secondary);
+}
+
+.terminal-header {
+    background: var(--bg-secondary);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27ca40; }
+
+.terminal-title {
+    margin-left: 1rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.terminal-body pre {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.terminal-body .keyword { color: var(--accent-purple); }
+.terminal-body .class-name { color: var(--accent-cyan); }
+.terminal-body .function { color: var(--accent-blue); }
+.terminal-body .string { color: var(--accent-green); }
+.terminal-body .comment { color: var(--text-muted); }
+
+.about-text {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Jupyter Lab Interface */
+.jupyter-lab {
+    background: #111827;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #374151;
+    font-family: var(--font-sans);
+}
+
+.jupyter-header {
+    background: #1f2937;
+    border-bottom: 1px solid #374151;
+}
+
+.jupyter-menu {
+    display: flex;
+    gap: 0;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    border-bottom: 1px solid #374151;
+}
+
+.jupyter-menu span {
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 4px;
+}
+
+.jupyter-menu span:hover {
+    background: #374151;
+    color: #e5e7eb;
+}
+
+.jupyter-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    flex-wrap: wrap;
+}
+
+.jupyter-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #9ca3af;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.jupyter-btn:hover {
+    background: #374151;
+    border-color: #4b5563;
+}
+
+.jupyter-btn.run-btn {
+    background: #374151;
+    border-color: #4b5563;
+}
+
+.jupyter-divider {
+    color: #4b5563;
+    margin: 0 0.25rem;
+}
+
+.jupyter-select {
+    background: #374151;
+    border: 1px solid #4b5563;
+    color: #e5e7eb;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.jupyter-kernel-status {
+    color: #10b981;
+    font-size: 0.8rem;
+    margin-left: auto;
+}
+
+.jupyter-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.jupyter-sidebar {
+    position: absolute;
+    left: 0;
+    display: none; /* Simplified for this demo */
+}
+
+.jupyter-tabs {
+    display: flex;
+    background: #111827;
+    border-bottom: 1px solid #374151;
+}
+
+.jupyter-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    background: #1f2937;
+    border-right: 1px solid #374151;
+    cursor: pointer;
+}
+
+.jupyter-tab.active {
+    background: #111827;
+    color: #e5e7eb;
+    border-bottom: 2px solid #3b82f6;
+    margin-bottom: -1px;
+}
+
+.tab-icon {
+    font-size: 1rem;
+}
+
+.tab-close {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.tab-close:hover {
+    opacity: 1;
+}
+
+.jupyter-notebook {
+    padding: 1rem;
+    background: #111827;
+}
+
+.jupyter-cell {
+    display: flex;
+    margin-bottom: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.jupyter-cell:hover {
+    border-color: #374151;
+}
+
+.jupyter-cell:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.jupyter-cell.selected {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.cell-sidebar {
+    width: 70px;
+    flex-shrink: 0;
+    padding: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.cell-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.cell-content {
+    flex: 1;
+    padding: 0.5rem;
+    overflow-x: auto;
+}
+
+.jupyter-cell.code .cell-content {
+    background: #1f2937;
+    border-radius: 4px;
+}
+
+.cell-input {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #e5e7eb;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.cell-input .keyword { color: #c084fc; }
+.cell-input .class-name { color: #67e8f9; }
+.cell-input .function { color: #60a5fa; }
+.cell-input .string { color: #86efac; }
+.cell-input .comment { color: #6b7280; }
+.cell-input .builtin { color: #fbbf24; }
+
+.cell-output {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #374151;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.output-label {
+    color: #ef4444;
+    margin-right: 0.5rem;
+}
+
+.output-text {
+    color: #e5e7eb;
+}
+
+.cell-rendered {
+    color: #e5e7eb;
+    line-height: 1.6;
+}
+
+.cell-rendered h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #f3f4f6;
+}
+
+.cell-rendered p {
+    color: #d1d5db;
+}
+
+.cell-rendered strong {
+    color: #60a5fa;
+}
+
+.cell-rendered em {
+    color: #9ca3af;
+}
+
+.cell-rendered kbd {
+    background: #374151;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    border: 1px solid #4b5563;
+    font-family: var(--font-mono);
+}
+
+/* Gotcha output animation */
+.gotcha-output {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #7c3aed, #db2777);
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    animation: gotcha-appear 0.3s ease;
+}
+
+@keyframes gotcha-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FindPenguins Embed */
+.penguin-embed {
+    margin-top: 2rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--bg-tertiary);
+}
+
+.penguin-embed .findpenguins-media {
+    min-height: 400px;
+}
+
+/* Mobile responsive for Jupyter */
+@media (max-width: 768px) {
+    .jupyter-menu {
+        display: none;
+    }
+
+    .jupyter-toolbar {
+        padding: 0.5rem;
+    }
+
+    .jupyter-toolbar .jupyter-select {
+        display: none;
+    }
+
+    .cell-sidebar {
+        width: 40px;
+    }
+
+    .cell-input {
+        font-size: 0.75rem;
+    }
+}
+
+/* Blog Section */
+.blog-posts {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.blog-card {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--bg-tertiary);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateX(5px);
+    border-color: var(--accent-blue);
+}
+
+.blog-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-orange);
+}
+
+.blog-card h3 {
+    margin: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.blog-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.blog-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    background: rgba(122, 207, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.blog-card.placeholder {
+    border-style: dashed;
+    text-align: center;
+}
+
+.placeholder-content {
+    color: var(--text-muted);
+}
+
+.placeholder-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.placeholder-content code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-purple);
+}
+
+/* Travel / Penguin Section */
+.travel {
+    text-align: center;
+}
+
+.inline-link {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent-cyan);
+}
+
+.inline-link:hover {
+    color: var(--accent-purple);
+    border-color: var(--accent-purple);
+}
+
+.penguin-cta {
+    margin-top: 2rem;
+}
+
+.penguin-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.penguin-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(122, 162, 247, 0.3);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    border-top: 1px solid var(--bg-tertiary);
+}
+
+.footer-joke {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    color: var(--accent-green);
+}
+
+/* Wittgenstein Quote */
+.wittgenstein-quote {
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    padding: 1.5rem;
+    border-left: 3px solid var(--accent-purple);
+    background: var(--bg-tertiary);
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+}
+
+.quote-text {
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin: 0;
+    min-height: 1.5em;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.quote-text.fade-out {
+    opacity: 0;
+}
+
+.quote-source {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+}
+
+.quote-source em {
+    color: var(--accent-purple);
+}
+
+.footer-main {
+    padding-top: 1rem;
+    border-top: 1px solid var(--bg-tertiary);
+}
+
+/* Light mode quote adjustments */
+[data-theme="light"] .wittgenstein-quote {
+    background: #f1f5f9;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-primary);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--bg-secondary);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-image {
+        max-width: 300px;
+    }
+
+    .philosophy-quote {
+        text-align: left;
+    }
+
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .terminal-body pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* Selection styling */
+::selection {
+    background: var(--accent-purple);
+    color: var(--bg-primary);
+}
+
+/* ================================
+   Light Switch Toggle
+   ================================ */
+.light-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.switch-plate {
+    position: relative;
+    width: 36px;
+    height: 56px;
+    background: linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 100%);
+    border-radius: 4px;
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        0 1px 2px rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid #71717a;
+}
+
+.switch-plate::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: linear-gradient(180deg, #52525b 0%, #3f3f46 100%);
+    border-radius: 2px;
+}
+
+.switch-toggle {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    height: 24px;
+    background: linear-gradient(180deg, #fafafa 0%, #e4e4e7 50%, #d4d4d8 100%);
+    border-radius: 2px;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: top 0.15s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-toggle::after {
+    content: '';
+    width: 16px;
+    height: 2px;
+    background: #a1a1aa;
+    border-radius: 1px;
+}
+
+/* Switch in "off" position (dark mode) */
+[data-theme="dark"] .switch-toggle,
+:not([data-theme]) .switch-toggle {
+    top: calc(100% - 28px);
+}
+
+/* Switch in "on" position (light mode) */
+[data-theme="light"] .switch-toggle {
+    top: 4px;
+}
+
+.switch-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
+
+/* Click effect */
+.switch-plate:active .switch-toggle {
+    height: 22px;
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Theme transition */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar,
+.blog-card,
+.duck-rabbit-container,
+footer,
+.penguin-embed {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Jupyter light mode overrides */
+[data-theme="light"] .jupyter-lab {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .jupyter-header {
+    background: #f1f5f9;
+}
+
+[data-theme="light"] .jupyter-menu {
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .jupyter-menu span {
+    color: #64748b;
+}
+
+[data-theme="light"] .jupyter-menu span:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+[data-theme="light"] .jupyter-toolbar {
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .jupyter-btn {
+    color: #64748b;
+}
+
+[data-theme="light"] .jupyter-btn:hover,
+[data-theme="light"] .jupyter-btn.run-btn {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+}
+
+[data-theme="light"] .jupyter-divider {
+    color: #cbd5e1;
+}
+
+[data-theme="light"] .jupyter-select {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+    color: #1e293b;
+}
+
+[data-theme="light"] .jupyter-tabs {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .jupyter-tab {
+    background: #f1f5f9;
+    color: #64748b;
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .jupyter-tab.active {
+    background: #ffffff;
+    color: #1e293b;
+}
+
+[data-theme="light"] .jupyter-notebook {
+    background: #ffffff;
+}
+
+[data-theme="light"] .jupyter-cell:hover {
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .jupyter-cell.code .cell-content {
+    background: #f8fafc;
+}
+
+[data-theme="light"] .cell-number {
+    color: #94a3b8;
+}
+
+[data-theme="light"] .cell-input {
+    color: #1e293b;
+}
+
+[data-theme="light"] .cell-input .keyword { color: #7c3aed; }
+[data-theme="light"] .cell-input .class-name { color: #0891b2; }
+[data-theme="light"] .cell-input .function { color: #2563eb; }
+[data-theme="light"] .cell-input .string { color: #16a34a; }
+[data-theme="light"] .cell-input .comment { color: #94a3b8; }
+[data-theme="light"] .cell-input .builtin { color: #d97706; }
+
+[data-theme="light"] .cell-output {
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .output-text {
+    color: #1e293b;
+}
+
+[data-theme="light"] .cell-rendered {
+    color: #1e293b;
+}
+
+[data-theme="light"] .cell-rendered h1 {
+    color: #0f172a;
+}
+
+[data-theme="light"] .cell-rendered p {
+    color: #475569;
+}
+
+[data-theme="light"] .cell-rendered strong {
+    color: #2563eb;
+}
+
+[data-theme="light"] .cell-rendered em {
+    color: #64748b;
+}
+
+[data-theme="light"] .cell-rendered kbd {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+}
+
+/* ================================
+   Media Section (Books & Films)
+   ================================ */
+.media-section {
+    max-width: 1000px;
+}
+
+/* ================================
+   Bookshelf Styling
+   ================================ */
+.bookshelf {
+    margin-top: 2rem;
+}
+
+.shelf {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 0 20px 0 20px;
+    position: relative;
+    min-height: 220px;
+}
+
+.shelf-wood {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(180deg, #8B7355 0%, #6B5344 50%, #5D4637 100%);
+    border-radius: 2px;
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+}
+
+.shelf-wood::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(180deg, #9D8B7A 0%, #8B7355 100%);
+    border-radius: 2px 2px 0 0;
+}
+
+.book {
+    position: relative;
+    width: 45px;
+    height: var(--book-height, 170px);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 0.4s ease;
+    margin-bottom: 20px;
+}
+
+.book-spine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--book-color) 70%, black) 0%,
+        var(--book-color) 15%,
+        var(--book-color) 85%,
+        color-mix(in srgb, var(--book-color) 70%, black) 100%
+    );
+    border-radius: 2px 4px 4px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 4px;
+    box-shadow:
+        2px 0 4px rgba(0, 0, 0, 0.2),
+        inset -2px 0 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.book-spine::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 4px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 1px;
+}
+
+.book-spine::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    right: 4px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
+}
+
+.book-title {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #f0e6d3;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.5px;
+    text-align: center;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.book-author {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.55rem;
+    color: rgba(240, 230, 211, 0.7);
+    margin-top: 8px;
+}
+
+.book-details {
+    position: absolute;
+    left: 55px;
+    top: 0;
+    width: 280px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--bg-tertiary);
+    border-radius: 8px;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.book-details h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.book-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.book-review {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.book-rating {
+    color: var(--accent-yellow);
+    font-size: 0.9rem;
+}
+
+/* Book hover and expanded states */
+.book:hover {
+    transform: translateY(-10px);
+}
+
+.book:hover .book-spine {
+    box-shadow:
+        2px 0 4px rgba(0, 0, 0, 0.2),
+        inset -2px 0 4px rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.book.expanded {
+    transform: translateY(-10px) rotate(-15deg);
+    z-index: 50;
+}
+
+.book.expanded .book-details {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) rotate(15deg);
+}
+
+/* ================================
+   VHS & DVD Styling
+   ================================ */
+.film-shelf {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 20px;
+    background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+    border-radius: 8px;
+}
+
+/* VHS Case */
+.vhs-case {
+    position: relative;
+    width: 25px;
+    height: 190px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.vhs-spine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+        #1a1a1a 0%,
+        #2d2d2d 10%,
+        #2d2d2d 90%,
+        #1a1a1a 100%
+    );
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 2px;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.vhs-spine::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 60px;
+    background: linear-gradient(180deg,
+        #f5f5dc 0%,
+        #e8e8c8 50%,
+        #d4d4a8 100%
+    );
+    border-radius: 1px;
+}
+
+.vhs-title {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    margin-top: auto;
+    text-align: center;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.vhs-year {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 4px;
+}
+
+.vhs-front {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 130px;
+    height: 190px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    border-radius: 2px;
+    opacity: 0;
+    transform: rotateY(-90deg);
+    transform-origin: left;
+    transition: all 0.4s ease;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.vhs-label {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    right: 10px;
+    bottom: 60px;
+    background: linear-gradient(180deg, #f5f5dc 0%, #e8e8c8 100%);
+    border-radius: 2px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.vhs-title-full {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.vhs-director {
+    font-size: 0.65rem;
+    color: #555;
+    margin-top: 4px;
+}
+
+/* DVD Case */
+.dvd-case {
+    position: relative;
+    width: 15px;
+    height: 190px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.dvd-spine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+        #1e3a5f 0%,
+        #2563eb 20%,
+        #3b82f6 50%,
+        #2563eb 80%,
+        #1e3a5f 100%
+    );
+    border-radius: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.dvd-title {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.dvd-front {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 135px;
+    height: 190px;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #1e40af 100%);
+    border-radius: 2px;
+    opacity: 0;
+    transform: rotateY(-90deg);
+    transform-origin: left;
+    transition: all 0.4s ease;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.dvd-front::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 60%
+    );
+}
+
+.dvd-cover {
+    position: absolute;
+    inset: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.dvd-title-full {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+.dvd-tagline {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Film details panel */
+.film-details {
+    position: absolute;
+    left: calc(100% + 145px);
+    top: 0;
+    width: 250px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--bg-tertiary);
+    border-radius: 8px;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.film-details h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.film-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.film-review {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.film-rating {
+    color: var(--accent-yellow);
+    font-size: 0.9rem;
+}
+
+/* VHS/DVD hover and expanded states */
+.vhs-case:hover,
+.dvd-case:hover {
+    transform: translateY(-5px);
+}
+
+.vhs-case.expanded,
+.dvd-case.expanded {
+    z-index: 50;
+}
+
+.vhs-case.expanded .vhs-front,
+.dvd-case.expanded .dvd-front {
+    opacity: 1;
+    transform: rotateY(0deg);
+}
+
+.vhs-case.expanded .film-details,
+.dvd-case.expanded .film-details {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Responsive media section */
+@media (max-width: 768px) {
+    .shelf {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .book-details {
+        position: fixed;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90vw;
+        max-width: 300px;
+    }
+
+    .book.expanded .book-details {
+        transform: translate(-50%, -50%) !important;
+    }
+
+    .film-shelf {
+        justify-content: center;
+    }
+
+    .film-details {
+        position: fixed;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90vw;
+        max-width: 280px;
+    }
+
+    .vhs-case.expanded .film-details,
+    .dvd-case.expanded .film-details {
+        transform: translate(-50%, -50%) !important;
+    }
+}
+
+/* Light mode adjustments for media */
+[data-theme="light"] .book-details,
+[data-theme="light"] .film-details {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .film-shelf {
+    background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+}

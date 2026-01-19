@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Jacco Oosterhuis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html"><span class="cursor">_</span> jacco<span class="accent">()</span></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="blog.html" class="nav-link active">Blog</a></li>
+            <li><a href="media.html" class="nav-link">Books & Films</a></li>
+            <li><a href="https://www.linkedin.com/in/jaccooosterhuis" target="_blank" class="nav-link external">LinkedIn <span class="arrow">↗</span></a></li>
+            <li><a href="https://findpenguins.com/trackingjacco" target="_blank" class="nav-link external">FindPenguins 🐧</a></li>
+        </ul>
+        <div class="light-switch" title="Toggle light/dark mode">
+            <div class="switch-plate" role="button" aria-label="Toggle theme">
+                <div class="switch-toggle"></div>
+            </div>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <main class="page-content">
+        <section id="blog" class="section blog">
+            <h2>Blog<span class="accent">.log()</span></h2>
+            <p class="section-intro">Thoughts, tutorials, and occasional philosophical tangents.</p>
+
+            <div class="blog-posts">
+                <article class="blog-card">
+                    <span class="blog-date">2026-01-15</span>
+                    <h3>Coming Soon: First Post</h3>
+                    <p>The blog is under construction. Like a good model, it needs training data first...</p>
+                    <div class="blog-tags">
+                        <span class="tag">#meta</span>
+                        <span class="tag">#hello-world</span>
+                    </div>
+                </article>
+
+                <article class="blog-card placeholder">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">📝</span>
+                        <p>More posts coming soon...</p>
+                        <code>while True: write_blog_post()</code>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wittgenstein-quote">
+            <p class="quote-text" id="wittgenstein-text"></p>
+            <p class="quote-source">— Ludwig Wittgenstein, <em>Philosophische Untersuchungen</em></p>
+        </div>
+        <div class="footer-main">
+            <p>Built with curiosity and caffeine | <span id="year"></span></p>
+            <p class="footer-joke">P(you enjoyed this) > 0.5</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
