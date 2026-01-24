@@ -1,0 +1,53 @@
+[
+  {
+    "title": "Blade Runner",
+    "director": "Ridley Scott",
+    "year": 1982,
+    "genre": "Sci-Fi",
+    "tagline": "More human than human",
+    "review": "The definitive cyberpunk film. \"All those moments will be lost in time, like tears in rain.\"",
+    "rating": 5,
+    "format": "vhs"
+  },
+  {
+    "title": "The Matrix",
+    "director": "Wachowskis",
+    "year": 1999,
+    "genre": "Sci-Fi/Action",
+    "tagline": "What is real?",
+    "review": "Red pill or blue pill? Revolutionary visual effects and philosophy wrapped in action.",
+    "rating": 5,
+    "format": "dvd"
+  },
+  {
+    "title": "2001: A Space Odyssey",
+    "director": "Stanley Kubrick",
+    "year": 1968,
+    "genre": "Sci-Fi",
+    "tagline": "An epic drama of adventure and exploration",
+    "review": "Cinema as visual poetry. HAL 9000 is still the most unsettling AI in film history.",
+    "rating": 5,
+    "format": "vhs"
+  },
+  {
+    "title": "Arrival",
+    "director": "Denis Villeneuve",
+    "year": 2016,
+    "genre": "Sci-Fi/Drama",
+    "tagline": "Why are they here?",
+    "review": "Linguistics saves the world. A beautiful meditation on time, language, and choice.",
+    "rating": 5,
+    "format": "dvd"
+  },
+  {
+    "title": "Everything Everywhere All at Once",
+    "spineTitle": "Everything Everywhere",
+    "director": "Daniels",
+    "year": 2022,
+    "genre": "Sci-Fi/Comedy",
+    "tagline": "The multiverse awaits",
+    "review": "Absurdist multiverse mayhem that's secretly about family, kindness, and finding meaning. Surprisingly moving.",
+    "rating": 5,
+    "format": "dvd"
+  }
+]

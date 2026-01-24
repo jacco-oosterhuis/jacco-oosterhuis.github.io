@@ -1,0 +1,52 @@
+[
+  {
+    "title": "A little life",
+    "spineTitle": "A little life",
+    "author": "Hanya Yanagihara",
+    "year": 2015,
+    "review": "This book gives me goosebumps every time I talk of it. Gives a new meaning to 'it's not your fault' and emotional trauma. It's devastating, painful, depressing, and beautiful. It's also too much.",
+    "rating": 5,
+    "color": "#8B4513",
+    "height": 180
+  },
+  {
+    "title": "Abundance",
+    "spineTitle": "Abundance",
+    "author": "Ezra Klein, Derek Thompson",
+    "year": 2025,
+    "review": "It's a stunning analysis of everything that's wrong with US bureaucracy and inefficiency. But you're left with a feeling of \"well yeah, obviously; but who wouldn't want that?!\" Or, as Bernie put it, where is the ideology?",
+    "rating": 5,
+    "color": "#2F4F4F",
+    "height": 165
+  },
+  {
+    "title": "Philosophical Investigations",
+    "spineTitle": "Philosophical Investigations",
+    "author": "Ludwig Wittgenstein",
+    "year": 1953,
+    "review": "Wittgenstein disrupts all of philosophy, and does it best in this book. It will only mean something to you if you've read everything that came before it; but it will mean a lot to you when you have.",
+    "rating": 4,
+    "color": "#4A0E4E",
+    "height": 155
+  },
+  {
+    "title": "La superba",
+    "spineTitle": "La superba",
+    "author": "Ilya Leonard Pfeijffer",
+    "year": 2016,
+    "review": "Made me have to go to genua. It's an ode to the city, italian culture, hilariously funny, and full of perversion.",
+    "rating": 5,
+    "color": "#1a365d",
+    "height": 170
+  },
+  {
+    "title": "If anyone builds it everyone dies: Why superhuman AI would kill us all",
+    "spineTitle": "If anyone builds it everyone dies",
+    "author": "Eliezer Yudkowski & Nate Soares",
+    "year": 2025,
+    "review": "A convincing read on why modern AI systems should be regulated, what all the dangers are, and why we shouldn't want to build it if we know what's good for us. I agree, except that the G-AI race is already destroying societies, which should be a much more compelling; and it isn't or doesn't seem to be.",
+    "rating": 4,
+    "color": "#065f46",
+    "height": 175
+  }
+]

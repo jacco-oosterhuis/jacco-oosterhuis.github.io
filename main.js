@@ -1,6 +1,82 @@
 // Main JavaScript for personal website
 
+// ================================
+// Shared Components (Header & Footer)
+// ================================
+
+function getHeaderHTML() {
+    // Determine which page is active based on current URL
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+    const navItems = [
+        { href: 'index.html', label: 'Home' },
+        { href: 'about.html', label: 'About' },
+        { href: 'blog.html', label: 'Blog' },
+        { href: 'media.html', label: 'Books & Films' }
+    ];
+
+    const navLinksHTML = navItems.map(item => {
+        const isActive = currentPage === item.href ||
+                        (currentPage === '' && item.href === 'index.html');
+        return `<li><a href="${item.href}" class="nav-link${isActive ? ' active' : ''}">${item.label}</a></li>`;
+    }).join('\n            ');
+
+    return `
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html"><span class="cursor">_</span> jacco<span class="accent">()</span></a>
+        </div>
+        <ul class="nav-links">
+            ${navLinksHTML}
+            <li><a href="https://www.linkedin.com/in/jaccooosterhuis" target="_blank" class="nav-link external">LinkedIn <span class="arrow">↗</span></a></li>
+            <li><a href="https://findpenguins.com/trackingjacco" target="_blank" class="nav-link external">FindPenguins 🐧</a></li>
+            <li><a href="https://signal.me/#eu/1UqXNpeCPD09OfTTiXSm3QoTIIsCrpMrh31p3CzmrLSIS87OgaVGq4cb5gGdtkgd" target="_blank" class="nav-link external">Signal</a></li>
+        </ul>
+        <div class="light-switch" title="Toggle light/dark mode">
+            <div class="switch-plate" role="button" aria-label="Toggle theme">
+                <div class="switch-toggle"></div>
+            </div>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>`;
+}
+
+function getFooterHTML() {
+    return `
+    <footer>
+        <div class="wittgenstein-quote">
+            <p class="quote-text" id="wittgenstein-text"></p>
+            <p class="quote-source">— Ludwig Wittgenstein, <em>Philosophische Untersuchungen</em></p>
+        </div>
+        <div class="footer-main">
+            <p>Coffee is an ideological experience | <span id="year"></span></p>
+            <p class="footer-joke">What I propose, therefore, is very simple: it is nothing more than to think what we are doing. — Hannah Arendt </p>
+        </div>
+    </footer>`;
+}
+
+function injectComponents() {
+    // Inject header
+    const headerPlaceholder = document.getElementById('header-placeholder');
+    if (headerPlaceholder) {
+        headerPlaceholder.outerHTML = getHeaderHTML();
+    }
+
+    // Inject footer
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+    if (footerPlaceholder) {
+        footerPlaceholder.outerHTML = getFooterHTML();
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Inject header and footer components first
+    injectComponents();
+
     // Set current year in footer
     const yearElement = document.getElementById('year');
     if (yearElement) {
@@ -94,40 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
         animalText.addEventListener('click', toggleAnimal);
     }
 
-    // Rotating tagline text (only on home page)
-    const rotatingElement = document.getElementById('rotating-text');
-
-    if (rotatingElement) {
-        const rotatingTexts = [
-            'penguin tracker',
-            'scatter plot philosopher',
-            'data wrangler',
-            'bug hunter',
-            'coffee-to-code converter',
-            'NaN debugger',
-            'regex enthusiast',
-            'p-value skeptic'
-        ];
-
-        let currentIndex = 0;
-
-        function rotateText() {
-            rotatingElement.style.opacity = '0';
-
-            setTimeout(() => {
-                currentIndex = (currentIndex + 1) % rotatingTexts.length;
-                rotatingElement.textContent = rotatingTexts[currentIndex];
-                rotatingElement.style.opacity = '1';
-            }, 300);
-        }
-
-        // Rotate text every 3 seconds
-        setInterval(rotateText, 3000);
-
-        // Add transition for rotating text
-        rotatingElement.style.transition = 'opacity 0.3s ease';
-    }
-
     // Smooth scroll for anchor links (backup for browsers without CSS smooth scroll)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -193,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 '📊 Error: Reality not found',
                 '🤖 I\'m not a real Jupyter notebook... or am I?',
                 '☕ Kernel panic: Coffee required',
+                'I don`t believe it man, life is kinda cool sometimes',
                 '🧠 RuntimeError: This is all an illusion'
             ];
 
@@ -262,50 +305,161 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ================================
-    // Books & Films Accordion
+    // Books & Films - Load from JSON
     // ================================
-    const books = document.querySelectorAll('.book');
-    const films = document.querySelectorAll('.vhs-case, .dvd-case');
 
-    // Book accordion - click to expand/collapse
-    books.forEach(book => {
-        book.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const wasExpanded = this.classList.contains('expanded');
+    // Helper: convert rating number to stars
+    function ratingToStars(rating) {
+        return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    }
 
-            // Close all books
-            books.forEach(b => b.classList.remove('expanded'));
+    // Helper: get author's last name for spine
+    function getLastName(author) {
+        const parts = author.split(' ');
+        return parts[parts.length - 1];
+    }
 
-            // If it wasn't expanded, expand it
-            if (!wasExpanded) {
-                this.classList.add('expanded');
-            }
-        });
-    });
+    // Render a single book
+    function renderBook(book, index) {
+        return `
+            <div class="book" data-book="${index}" style="--book-color: ${book.color}; --book-height: ${book.height}px;">
+                <div class="book-spine">
+                    <span class="book-title">${book.spineTitle || book.title}</span>
+                    <span class="book-author">${getLastName(book.author)}</span>
+                </div>
+                <div class="book-details">
+                    <h3>${book.title}</h3>
+                    <p class="book-meta">${book.author} · ${book.year}</p>
+                    <p class="book-review">${book.review}</p>
+                    <span class="book-rating">${ratingToStars(book.rating)}</span>
+                </div>
+            </div>`;
+    }
 
-    // Film accordion - click to expand/collapse
-    films.forEach(film => {
-        film.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const wasExpanded = this.classList.contains('expanded');
+    // Render a single film (VHS or DVD)
+    function renderFilm(film, index) {
+        const spineTitle = film.spineTitle || film.title;
 
-            // Close all films
-            films.forEach(f => f.classList.remove('expanded'));
-
-            // If it wasn't expanded, expand it
-            if (!wasExpanded) {
-                this.classList.add('expanded');
-            }
-        });
-    });
-
-    // Close expanded items when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.book') && !e.target.closest('.vhs-case') && !e.target.closest('.dvd-case')) {
-            books.forEach(b => b.classList.remove('expanded'));
-            films.forEach(f => f.classList.remove('expanded'));
+        if (film.format === 'vhs') {
+            return `
+                <div class="vhs-case" data-film="${index}">
+                    <div class="vhs-spine">
+                        <span class="vhs-title">${spineTitle}</span>
+                        <span class="vhs-year">${film.year}</span>
+                    </div>
+                    <div class="vhs-front">
+                        <div class="vhs-label">
+                            <span class="vhs-title-full">${film.title}</span>
+                            <span class="vhs-director">${film.director}</span>
+                        </div>
+                    </div>
+                    <div class="film-details">
+                        <h3>${film.title}</h3>
+                        <p class="film-meta">${film.director} · ${film.year} · ${film.genre}</p>
+                        <p class="film-review">${film.review}</p>
+                        <span class="film-rating">${ratingToStars(film.rating)}</span>
+                    </div>
+                </div>`;
+        } else {
+            return `
+                <div class="dvd-case" data-film="${index}">
+                    <div class="dvd-spine">
+                        <span class="dvd-title">${spineTitle}</span>
+                    </div>
+                    <div class="dvd-front">
+                        <div class="dvd-cover">
+                            <span class="dvd-title-full">${film.title}</span>
+                            <span class="dvd-tagline">${film.tagline}</span>
+                        </div>
+                    </div>
+                    <div class="film-details">
+                        <h3>${film.title}</h3>
+                        <p class="film-meta">${film.director} · ${film.year} · ${film.genre}</p>
+                        <p class="film-review">${film.review}</p>
+                        <span class="film-rating">${ratingToStars(film.rating)}</span>
+                    </div>
+                </div>`;
         }
-    });
+    }
+
+    // Setup accordion behavior for books and films
+    function setupMediaAccordion() {
+        const books = document.querySelectorAll('.book');
+        const films = document.querySelectorAll('.vhs-case, .dvd-case');
+
+        books.forEach(book => {
+            book.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const wasExpanded = this.classList.contains('expanded');
+                books.forEach(b => b.classList.remove('expanded'));
+                if (!wasExpanded) {
+                    this.classList.add('expanded');
+                }
+            });
+        });
+
+        films.forEach(film => {
+            film.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const wasExpanded = this.classList.contains('expanded');
+                films.forEach(f => f.classList.remove('expanded'));
+                if (!wasExpanded) {
+                    this.classList.add('expanded');
+                }
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.book') && !e.target.closest('.vhs-case') && !e.target.closest('.dvd-case')) {
+                books.forEach(b => b.classList.remove('expanded'));
+                films.forEach(f => f.classList.remove('expanded'));
+            }
+        });
+    }
+
+    // Load and render books
+    async function loadBooks() {
+        const container = document.getElementById('bookshelf-container');
+        if (!container) return;
+
+        try {
+            const response = await fetch('data/books.json');
+            const books = await response.json();
+
+            const shelfWood = container.querySelector('.shelf-wood');
+            const booksHTML = books.map((book, i) => renderBook(book, i)).join('');
+
+            // Insert books before the shelf wood
+            shelfWood.insertAdjacentHTML('beforebegin', booksHTML);
+        } catch (error) {
+            console.log('Could not load books:', error);
+        }
+    }
+
+    // Load and render films
+    async function loadFilms() {
+        const container = document.getElementById('filmshelf-container');
+        if (!container) return;
+
+        try {
+            const response = await fetch('data/films.json');
+            const films = await response.json();
+
+            container.innerHTML = films.map((film, i) => renderFilm(film, i)).join('');
+        } catch (error) {
+            console.log('Could not load films:', error);
+        }
+    }
+
+    // Load media and setup accordion
+    const bookshelfContainer = document.getElementById('bookshelf-container');
+    const filmshelfContainer = document.getElementById('filmshelf-container');
+
+    if (bookshelfContainer || filmshelfContainer) {
+        Promise.all([loadBooks(), loadFilms()]).then(() => {
+            setupMediaAccordion();
+        });
+    }
 
     // ================================
     // Wittgenstein Quotes

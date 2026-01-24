@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Films | Jacco Oosterhuis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="page-content">
+        <section class="section media-section">
+            <h2>📚 Bookshelf</h2>
+            <p class="section-intro">Books I've read and would recommend. Mostly so I don't forget them.</p>
+
+            <div class="bookshelf">
+                <div class="shelf" id="bookshelf-container">
+                    <!-- Books loaded dynamically from data/books.json -->
+                    <div class="shelf-wood"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section media-section">
+            <h2>🎬 Film Collection</h2>
+            <p class="section-intro">Films worth watching. A mix of VHS nostalgia and DVD classics.</p>
+            <p class="section-intro" style="font-family: var(--font-mono); color: var(--accent-yellow);">
+                🚧 ｡･:*:･ﾟ★ UNDER CONSTRUCTION ★ﾟ･:*:･｡ 🚧
+            </p>
+
+            <div class="film-shelf" id="filmshelf-container">
+                <!-- Films loaded dynamically from data/films.json -->
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+</body>
+</html>

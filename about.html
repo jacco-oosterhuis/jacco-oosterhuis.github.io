@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Jacco Oosterhuis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="page-content">
+        <section id="about" class="section about">
+            <h2>&lt;About /&gt;</h2>
+            <div class="about-content">
+                <div class="jupyter-lab">
+                    <div class="jupyter-header">
+                        <div class="jupyter-menu">
+                            <span>File</span>
+                            <span>Edit</span>
+                            <span>View</span>
+                            <span>Run</span>
+                            <span>Kernel</span>
+                            <span>Help</span>
+                        </div>
+                        <div class="jupyter-toolbar">
+                            <button class="jupyter-btn" title="Save">💾</button>
+                            <button class="jupyter-btn" title="Add cell">+</button>
+                            <button class="jupyter-btn" title="Cut">✂️</button>
+                            <button class="jupyter-btn" title="Copy">📋</button>
+                            <button class="jupyter-btn" title="Paste">📄</button>
+                            <button class="jupyter-btn run-btn" title="Run">▶️ Run</button>
+                            <span class="jupyter-divider">|</span>
+                            <select class="jupyter-select">
+                                <option>Python 3 (ipykernel)</option>
+                            </select>
+                            <span class="jupyter-kernel-status">● Idle</span>
+                        </div>
+                    </div>
+                    <div class="jupyter-sidebar">
+                        <div class="sidebar-icon active">📁</div>
+                        <div class="sidebar-icon">🔍</div>
+                        <div class="sidebar-icon">🔧</div>
+                    </div>
+                    <div class="jupyter-main">
+                        <div class="jupyter-tabs">
+                            <div class="jupyter-tab active">
+                                <span class="tab-icon">📓</span>
+                                about_me.ipynb
+                                <span class="tab-close">×</span>
+                            </div>
+                        </div>
+                        <div class="jupyter-notebook">
+                            <div class="jupyter-cell markdown" data-cell="0" tabindex="0">
+                                <div class="cell-sidebar">
+                                    <span class="cell-number"></span>
+                                </div>
+                                <div class="cell-content">
+                                    <div class="cell-rendered">
+                                        <h1>👋 Mambo Vipi? I'm Jacco</h1>
+                                        <p>Welcome to my personal website. I'm a <strong>data scientist</strong>, <strong> cyclist </strong>, <strong> mountain biker</strong>, maybe a <strong>philosopher</strong>, and <strong>food enthusiast</strong> (which is by all means an emtpy term; who doesn't like food?) </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jupyter-cell code" data-cell="1" tabindex="0">
+                                <div class="cell-sidebar">
+                                    <span class="cell-number">[1]:</span>
+                                </div>
+                                <div class="cell-content">
+                                    <pre class="cell-input"><span class="keyword">class</span> <span class="class-name">DataScientist</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self):
+        self.name = <span class="string">"Jacco Oosterhuis"</span>
+        self.role = <span class="string">"Data Scientist & Philosopher"</span>
+        self.interests = [
+            <span class="string">"machine learning"</span>,
+            <span class="string">"sports"</span>,
+            <span class="string">"traveling"</span>,
+            <span class="string"><a href="https://findpenguins.com/2zhhsb5mmg9cf" target="_top" style="color: inherit; text-decoration: none">"penguins"</a></span> 🐧
+        ]
+
+me = DataScientist()
+<span class="builtin">print</span>(me.interests)</pre>
+                                    <div class="cell-output">
+                                        <span class="output-label">Out[1]:</span>
+                                        <span class="output-text">['machine learning', 'philosophy', 'traveling', 'cooking', 'literature']</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jupyter-cell code" data-cell="2" tabindex="0">
+                                <div class="cell-sidebar">
+                                    <span class="cell-number">[2]:</span>
+                                </div>
+                                <div class="cell-content">
+                                    <pre class="cell-input"><span class="comment"># Do I want to talk about work on a personal website?</span>
+                                        <span class="comment"># Well, it's also personal interests...</span>
+work_stuff = {
+
+    <span class="string">"exploring"</span>: <span class="string">PYMC: I like quantifying uncertainty,
+                 understanding distributions, modelling causality,
+                 rather than throwing big models on data
+                 and see what comes out.</span>,
+
+    <span class="string">"contemplating"</span>: <span class="string">I want to understand methods that I use,
+                      and blogposts aren't enough:
+                      I want to know why something works.</span>,
+
+    <span class="string">"staring_at"</span>: <span class="string">Distribution plots, heatmaps, clusters.</span>,
+
+    <span class="string">"dislike"</span>: <span class="string">Buzzwords; the bigger the better
+                <small>that's what she said</small>;
+                GAI everywhere all the time;
+                corporate prescribed mandatory fun.</span>
+}</pre>
+                                </div>
+                            </div>
+                            <div class="jupyter-cell markdown" data-cell="3" tabindex="0">
+                                <div class="cell-sidebar">
+                                    <span class="cell-number"></span>
+                                </div>
+                                <div class="cell-content">
+                                    <div class="cell-rendered">
+                                        <h3>Outside of work ٩(◕‿◕｡)۶</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jupyter-cell code" data-cell="4" tabindex="0">
+                                <div class="cell-sidebar">
+                                    <span class="cell-number">[3]:</span>
+                                </div>
+                                <div class="cell-content">
+                                    <pre class="cell-input"><span class="comment"># ᕦ(ò_óˇ)ᕤ sports and suffering</span>
+hobbies = {
+    <span class="string">"cycling"</span>: <span class="string">"ultra-endurance road events
+               (have another one planned this year)"</span>,
+    <span class="string">"mtb"</span>: <span class="string">"downhill, always just for 'fun'"</span>,
+    <span class="string">"winter"</span>: <span class="string">"ski-touring & snowboarding
+              when the snow-itch hits"</span>  <span class="comment"># ∗˚(* ˃̤൬˂̤ *)˚∗</span>
+}</pre>
+                                </div>
+                            </div>
+                            <div class="jupyter-cell code" data-cell="5" tabindex="0">
+                                <div class="cell-sidebar">
+                                    <span class="cell-number">[4]:</span>
+                                </div>
+                                <div class="cell-content">
+                                    <pre class="cell-input"><span class="comment"># (っ˘ڡ˘ς) kitchen experiments</span>
+cooking = {
+    <span class="string">"style"</span>: <span class="string">"creative, but I appreciate
+             a good recipe"</span>,
+    <span class="string">"coffee"</span>: <span class="string">"essential, but I don't take it
+              too far (there is such a thing)"</span>  <span class="comment"># ☕</span>
+}</pre>
+                                </div>
+                            </div>
+                            <div class="jupyter-cell code" data-cell="6" tabindex="0">
+                                <div class="cell-sidebar">
+                                    <span class="cell-number">[5]:</span>
+                                </div>
+                                <div class="cell-content">
+                                    <pre class="cell-input"><span class="comment"># ┬┴┬┴┤(･_├┬┴┬┴ avoiding the feed</span>
+social_media = <span class="keyword">None</span>  <span class="comment"># ¯\_(ツ)_/¯ happy to announce</span>
+
+addiction = <span class="string">"reading the news; sometimes too frequently."</span>
+daily_habit_and_struggle = <span class="string">"finding time for reading"</span>  <span class="comment"># 📚</span></pre>
+                                </div>
+                            </div>
+                            <div class="jupyter-cell markdown" data-cell="3" tabindex="0">
+                                <div class="cell-sidebar">
+                                    <span class="cell-number"></span>
+                                </div>
+                                <div class="cell-content">
+                                    <div class="cell-rendered">
+                                        <p><em>Click a cell and press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run it...</em> 😉</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+</body>
+</html>
