@@ -16,24 +16,8 @@
             <h2>Blog<span class="accent">.log()</span></h2>
             <p class="section-intro">Thoughts, tutorials, and occasional philosophical tangents.</p>
 
-            <div class="blog-posts">
-                <article class="blog-card">
-                    <span class="blog-date">2026-01-15</span>
-                    <h3>Coming Soon: First Post</h3>
-                    <p>The blog is under construction. Like a good model, it needs training data first...</p>
-                    <div class="blog-tags">
-                        <span class="tag">#meta</span>
-                        <span class="tag">#hello-world</span>
-                    </div>
-                </article>
-
-                <article class="blog-card placeholder">
-                    <div class="placeholder-content">
-                        <span class="placeholder-icon">📝</span>
-                        <p>More posts coming soon...</p>
-                        <code>while True: write_blog_post()</code>
-                    </div>
-                </article>
+            <div id="blog-posts-container" class="blog-posts">
+                <div class="loading-spinner">Loading posts...</div>
             </div>
         </section>
     </main>
