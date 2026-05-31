@@ -280,42 +280,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // Blog Posts - Load from JSON & MD
     // ================================
 
-    async function loadBlogPosts() {
-        const container = document.getElementById('blog-posts-container');
-        if (!container) return;
+  async function loadBlogPosts() {
+    const container = document.getElementById('blog-posts-container');
+    if (!container) return;
 
-        try {
-            const response = await fetch('data/blog.json');
-            const posts = await response.json();
+    try {
+        const response = await fetch('data/blog.json');
 
-            if (posts.length === 0) {
-                container.innerHTML = '<p class="section-intro">No posts yet. Stay tuned!</p>';
-                return;
-            }
-
-            container.innerHTML = ''; // Clear loading spinner
-            posts.forEach(post => {
-                container.insertAdjacentHTML('beforeend', renderBlogPost(post));
-            });
-
-            setupBlogInteraction();
-        } catch (error) {
-            console.error('Could not load blog posts:', error);
-            container.innerHTML = '<p class="section-intro">Error loading posts. Please try again later.</p>';
+        // ✅ FIX 1: Check HTTP status, don't just trust that fetch() didn't throw
+        if (!response.ok) {
+            throw new Error(`Failed to load blog.json — HTTP ${response.status} at ${response.url}`);
         }
+
+        const posts = await response.json();
+
+        if (posts.length === 0) {
+            container.innerHTML = '<p class="section-intro">No posts yet. Stay tuned!</p>';
+            return;
+        }
+
+        container.innerHTML = '';
+        posts.forEach(post => {
+            container.insertAdjacentHTML('beforeend', renderBlogPost(post));
+        });
+
+        setupBlogInteraction();
+    } catch (error) {
+        console.error('Could not load blog posts:', error);
+        container.innerHTML = '<p class="section-intro">Error loading posts. Please try again later.</p>';
+    }
     }
 
     function renderBlogPost(post) {
         const tagsHTML = post.tags.map(tag => `<span class="tag">#${tag}</span>`).join('');
-
         return `
             <article class="blog-card" data-post-id="${post.id}" data-file="${post.file}">
                 <span class="blog-date">${post.date}</span>
                 <h3>${post.title}</h3>
                 <p class="blog-excerpt">${post.excerpt}</p>
-                <div class="blog-tags">
-                    ${tagsHTML}
-                </div>
+                <div class="blog-tags">${tagsHTML}</div>
                 <div class="blog-content">
                     <div class="loading-spinner">Loading content...</div>
                 </div>
@@ -326,46 +329,47 @@ document.addEventListener('DOMContentLoaded', function() {
         const cards = document.querySelectorAll('.blog-card');
 
         cards.forEach(card => {
-            card.addEventListener('click', async function() {
+            card.addEventListener('click', async function () {
                 if (this.classList.contains('expanded')) {
                     this.classList.remove('expanded');
                     return;
                 }
 
-                // Close other expanded cards
-                cards.forEach(c => {
-                    if (c !== this) c.classList.remove('expanded');
-                });
-
+                cards.forEach(c => { if (c !== this) c.classList.remove('expanded'); });
                 this.classList.add('expanded');
 
-                // Load content if not already loaded
                 const contentDiv = this.querySelector('.blog-content');
-                if (contentDiv.getAttribute('data-loaded') !== 'true') {
-                    const fileName = this.getAttribute('data-file');
-                    try {
-                        const response = await fetch(`posts/${fileName}`);
-                        const markdown = await response.text();
-                        contentDiv.innerHTML = marked.parse(markdown);
-                        contentDiv.setAttribute('data-loaded', 'true');
-                    } catch (error) {
-                        console.error('Error loading post content:', error);
-                        contentDiv.innerHTML = '<p>Error loading content. Please try again.</p>';
+                if (contentDiv.getAttribute('data-loaded') === 'true') return;
+
+                const fileName = this.getAttribute('data-file');
+
+                // ✅ FIX 2: Build path from root so it works regardless of page location
+                // Adjust this prefix to match where your posts folder actually lives on the server
+                const postPath = `/posts/${fileName}`;
+
+                contentDiv.innerHTML = '<div class="loading-spinner">Loading content...</div>';
+
+                try {
+                    console.log(`Fetching post from: ${postPath}`); // helpful for debugging
+                    const response = await fetch(postPath);
+
+                    // ✅ FIX 1 again: Check HTTP status before reading body
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status} — could not load ${response.url}`);
                     }
+
+                    const markdown = await response.text();
+                    contentDiv.innerHTML = marked.parse(markdown);
+                    contentDiv.setAttribute('data-loaded', 'true');
+                } catch (error) {
+                    console.error('Error loading post content:', error);
+                    contentDiv.innerHTML = `<p>Error loading content: ${error.message}</p>`;
                 }
             });
         });
     }
 
-    // Initialize blog loading
     loadBlogPosts();
-
-
-    // Console message for fellow developers
-    console.log('%c Welcome, fellow human! 🤖', 'font-size: 20px; color: #7aa2f7;');
-    console.log('%c If you\'re reading this, you\'re my kind of person.', 'font-size: 14px; color: #9ece6a;');
-    console.log('%c Fun fact: P(you finding this) ≈ 0.01', 'font-size: 12px; color: #bb9af7;');
-
     // Add scroll-triggered animations
     const observerOptions = {
         threshold: 0.1,
