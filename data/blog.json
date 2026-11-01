@@ -6,5 +6,13 @@
         "tags": ["offline", "society"],
         "file": "first-post.md",
         "excerpt": "I was forced to manage without (meaningful) smartphone access for only two weeks. As proper clickbait goes: the results were surprising."
+    },
+    {
+        "id": "second-post",
+        "title": "Why I write so little — or, how my language is lacking.",
+        "date": "2026-11-01",
+        "tags": ["offline", "philosophy", "language"],
+        "file": "why-I-write-so-little.md",
+        "excerpt": "How can we use language to describe our feelings? What words are we supposed to use, and when is one really sick?"
     }
 ]
